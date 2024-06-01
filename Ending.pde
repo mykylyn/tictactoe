@@ -1,4 +1,4 @@
-class Ending{
+/**class Ending{
 
   int EbuttonWidth = 200;
   int EbuttonHeight = 50;
@@ -57,7 +57,7 @@ class Ending{
 
 
 
-
+/**
 
 
 }
@@ -76,3 +76,4 @@ if (EoverButton(EbuttonX, EstartButtonY, EbuttonWidth, EbuttonHeight)) {
     
 
 }
+**/

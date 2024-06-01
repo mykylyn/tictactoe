@@ -1,77 +1,86 @@
 import processing.dxf.*;
 
-//the error is in the ending class
-//TODO: intergrate the dynamic tic tac toe grid to the Tictactoe pg
-//TODO: Make the networking work
-//TODO: Make the rounds functionality work
-//TODO: Make the point functionality work
+// the error is in the ending class
+// TODO: intergrate the dynamic tic tac toe grid to the Tictactoe pg XXXXX
+// TODO: Make the networking work
+// TODO: Make the rounds functionality work
+  //TOD0: Need to make the update functionality effecient
+// TODO: Make the point functionality work
+// TODO: The circle is not centered
+// TODO: Repeated modification to already filled boxes
 
-int pg=0;
+int pg = 0;
+int rows = 3;
+int cols = 3;
+int round = 1;
+boolean finished = false;
 
+InfoPage infopg = new InfoPage();
+Tictactoe tttpg = new Tictactoe();
+landingPage home = new landingPage();
+// Ending end= new Ending();
 
-
-
-InfoPage infopg=new InfoPage();
-Tictactoe tttpg=new Tictactoe();
-landingPage home=new landingPage();
-Ending end= new Ending();
-
-//Organizer pgmg= new Organizer();
+// Organizer pgmg= new Organizer();
 
 public void setup() {
-  size(1000,800);
-  
-  
-  //landing screen
+  size(800, 800);
+
+  // landing screen
   home.layout();
-  //info screen
+  // info screen
   infopg.layout();
-  
-  end.layout();
-  
-  
+
+  // end.layout();
 }
 
+public void draw() {
+  if (pg == 0) {
+    home.display();
 
-
-
-
-public void draw(){
-    if(pg==0){
-      home.display();
-  
-    }
-    else if(pg==1){
-      infopg.display();
-      //infopg.decide();
-      infopg.starter();
-    }
-    else if(pg==2){
+  } else if (pg == 1) {
+    infopg.display();
+    // infopg.decide();
+    infopg.starter();
+    tttpg.layout();
+    //tttpg.decide();
+  } else if (pg == 2) {
+    for (int i = 0; i < round; i++) {
       tttpg.display();
-      
-  
+      finished = true;
     }
-    else if(pg==3){
-     end.display();
-  
-    }
- 
-  
-  
- 
-  
-   
-  //if(positions.length()>0){}
-  
+
+  } else if (pg == 3) {
+    home.display();
+  }
+
+  // if(positions.length()>0){}
 }
 
-void keyPressed() {  
-   infopg.decide();
- 
-}
+void keyPressed() {
+  if (pg == 0) {
+    // home.display();
 
+  } else if (pg == 1) {
+    infopg.decide();
+  } else if (pg == 2) {
+    tttpg.positioning();
+
+  } else if (pg == 3) {
+    // home.display();
+  }
+}
 
 void mousePressed() {
-  home.mouseEvents();
+  
+  if (pg == 0) {
+    home.mouseEvents();
 
+  } else if (pg == 1) {
+    
+  } else if (pg == 2) {
+    
+
+  } else if (pg == 3) {
+    
+  }
 }
