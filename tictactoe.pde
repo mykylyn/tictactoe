@@ -132,7 +132,18 @@ class Tictactoe {
       line(j * cellSize_cols, 0, j * cellSize_cols, rows * cellSize_cols);
     }
   }
+  void win(){
+    for (int q = 0; q < rows; q++) {
+      for (int u = 0; u < cols; u++) {
+        //code for horizontal
+        //code for vertical
+        //code for diagonal
+        //do each of it with if statement
+      }
+    }
   
+  
+  }
   void decide(){
     int count=0;
     for (int q = 0; q < rows; q++) {
