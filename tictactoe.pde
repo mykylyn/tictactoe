@@ -1,6 +1,6 @@
 class Tictactoe {
-  PImage x;
-  PImage o;
+  //PImage x;
+  //PImage o;
 
   int dim = 3;
 
@@ -14,12 +14,14 @@ class Tictactoe {
 
   int cellSize_cols;
   int cellSize_rows;
+  
+  X x= new X();
 
   void layout() {
     positions = new int[rows][cols];
     keylay = new int[rows][cols];
-    x = loadImage("x.png");
-    o = loadImage("o.png");
+    //x = loadImage("x.png");
+    //o = loadImage("o.png");
   }
 
   void display() {
@@ -37,13 +39,14 @@ class Tictactoe {
    *
  */
     drawGrid();
+    
+    x.display();
 
     for (int i = 0; i < rows; i++) {
       for (int x = 0; x < cols; x++) {
-        if (positions[i][x] == 0) {
-        } else if (positions[i][x] == 1) {
-          image(o, (float) ((width / rows) * x), (float) (height / cols) * i,
-              (float) cellSize_rows, (float) cellSize_cols);
+        if (positions[i][x] == 1) {
+         // image(o, (float) ((width / rows) * x), (float) (height / cols) * i,
+          //    (float) cellSize_rows, (float) cellSize_rows);
         } else if (positions[i][x] == 2) {
         }
       }

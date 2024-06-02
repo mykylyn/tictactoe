@@ -23,7 +23,7 @@ landingPage home = new landingPage();
 // Organizer pgmg= new Organizer();
 
 public void setup() {
-  size(800, 800);
+  size(1000, 800);
 
   // landing screen
   home.layout();
