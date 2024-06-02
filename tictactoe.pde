@@ -15,11 +15,12 @@ class Tictactoe {
   int cellSize_cols;
   int cellSize_rows;
   
-  X x= new X();
+  X x;
 
   void layout() {
     positions = new int[rows][cols];
     keylay = new int[rows][cols];
+    x= new X(width/2,height/2);
     //x = loadImage("x.png");
     //o = loadImage("o.png");
   }
@@ -43,11 +44,14 @@ class Tictactoe {
     x.display();
 
     for (int i = 0; i < rows; i++) {
-      for (int x = 0; x < cols; x++) {
-        if (positions[i][x] == 1) {
+      for (int u = 0; u < cols; u++) {
+        if (positions[i][u] == 1) {
          // image(o, (float) ((width / rows) * x), (float) (height / cols) * i,
           //    (float) cellSize_rows, (float) cellSize_rows);
-        } else if (positions[i][x] == 2) {
+          int nx=(width / rows) * u;
+          int ny=(height / cols) * i;
+          x=new X(nx,ny);
+        } else if (positions[i][u] == 2) {
         }
       }
     }
@@ -142,7 +146,7 @@ class Tictactoe {
       for (int u = 0; u < cols; u++) {
         if (positions[q][u]==1 || positions[q][u]==2) {
           count++;
-          System.out.println("update made");
+          //System.out.println("update made");
         }
       }
     }

@@ -3,6 +3,15 @@ class X{
   float progress = 0;
   float totalFrames = 100; // Adjust this for longer/shorter animation
   int size =100;
+  int x;
+  int y;
+  
+  X(int x, int y){
+    this.x=x;
+    this.y=y;
+  
+  }
+  
   void layout(){
     frameRate(60);
   
@@ -16,14 +25,14 @@ class X{
   
   // Draw the X
   stroke(0);
-  strokeWeight(2);
-  line(width/2 - lineLength, height/2 - lineLength, width/2 + lineLength, height/2 + lineLength);
-  line(width/2 + lineLength, height/2 - lineLength, width/2 - lineLength, height/2 + lineLength);
+  //strokeWeight(2);
+  line(x - lineLength, y - lineLength, x + lineLength, y + lineLength);
+  line(x + lineLength, y - lineLength, x - lineLength, y + lineLength);
   
   // Check if animation is complete and draw the stable X
   if (progress >= 1) {
-    line(width/2 - lineLength, height/2 - lineLength, width/2 + lineLength, height/2 + lineLength);
-    line(width/2 + lineLength, height/2 - lineLength, width/2 - lineLength, height/2 + lineLength);
+    line(x - lineLength, y - lineLength, x + lineLength, y + lineLength);
+    line(x + lineLength, y - lineLength, x - lineLength, y + lineLength);
     noLoop(); // Stop animation after completion
   }
   
