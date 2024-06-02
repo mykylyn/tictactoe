@@ -16,11 +16,13 @@ class Tictactoe {
   int cellSize_rows;
   
   X x;
+   X[][] xGrid; // 2D array to hold X instances
 
   void layout() {
     positions = new int[rows][cols];
     keylay = new int[rows][cols];
     x= new X(width/2,height/2);
+    xGrid = new X[rows][cols]; // Initialize the 2D array
     //x = loadImage("x.png");
     //o = loadImage("o.png");
   }
@@ -41,18 +43,28 @@ class Tictactoe {
  */
     drawGrid();
     
-    x.display();
-
+    //x.display();
+    System.out.println("display ran..");
     for (int i = 0; i < rows; i++) {
       for (int u = 0; u < cols; u++) {
+        System.out.println("look: "+i+" "+u);
         if (positions[i][u] == 1) {
          // image(o, (float) ((width / rows) * x), (float) (height / cols) * i,
           //    (float) cellSize_rows, (float) cellSize_rows);
-          int nx=(width / rows) * u;
-          int ny=(height / cols) * i;
-          x=new X(nx,ny);
-        } else if (positions[i][u] == 2) {
-        }
+          // Calculate cell coordinates based on grid size
+            // Calculate cell coordinates based on grid size
+                    int nx = (width / rows) * u + cellSize_cols / 2;
+                    int ny = (height / cols) * i + cellSize_rows / 2;
+                    if (xGrid[i][u] == null) { // If no X instance exists for this position
+                      xGrid[i][u] = new X(nx, ny); // Create a new X instance
+                }else {
+  xGrid[i][u].progress = 0; // Reset the progress of the existing X instance
+}
+               System.out.println("did "+i+" "+u);
+              xGrid[i][u].display(); 
+              
+              } else if (positions[i][u] == 2) {
+            }
       }
     }
     

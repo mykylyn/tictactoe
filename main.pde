@@ -34,6 +34,7 @@ public void setup() {
 }
 
 public void draw() {
+  System.out.println("I ran");
   if (pg == 0) {
     home.display();
 
@@ -44,10 +45,8 @@ public void draw() {
     tttpg.layout();
     //tttpg.decide();
   } else if (pg == 2) {
-    for (int i = 0; i < round; i++) {
-      tttpg.display();
-      finished = true;
-    }
+    tttpg.display();
+    System.out.println("I ran inside");
 
   } else if (pg == 3) {
     home.display();
@@ -57,6 +56,7 @@ public void draw() {
 }
 
 void keyPressed() {
+  loop();
   if (pg == 0) {
     // home.display();
 

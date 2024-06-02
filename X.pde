@@ -18,7 +18,7 @@ class X{
   }
   void display(){
   // Calculate progress for each frame
-  progress += 1 / totalFrames;
+  progress += 0.01 / totalFrames;
   
   // Calculate line lengths based on progress
   float lineLength = progress * size / 2;
