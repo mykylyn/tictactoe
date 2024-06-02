@@ -48,8 +48,9 @@ class Tictactoe {
         }
       }
     }
-    
+    win();
     decide();
+    
   }
 
   void positioning() {
@@ -133,13 +134,24 @@ class Tictactoe {
     }
   }
   void win(){
+    int hor=0;
+    int ver=0;
+    int dia=0;
     for (int q = 0; q < rows; q++) {
-      for (int u = 0; u < cols; u++) {
-        //code for horizontal
-        //code for vertical
-        //code for diagonal
-        //do each of it with if statement
+      for (int u = 0; u < rows; u++) {
+       if(positions[q][u]==1){
+         hor++;
+       }
+       if(positions[u][q]==1){
+         ver++;
+       }
       }
+       
+    }
+    
+    if(hor==rows || ver ==cols){
+      System.out.println("You won");
+    
     }
   
   
