@@ -55,31 +55,59 @@ class Tictactoe {
     if (keyCode == ENTER) {
       user = input;
       input = "";
+      boolean userMoved = false;
       for (int q = 0; q < rows; q++) {
         for (int u = 0; u < cols; u++) {
           String num = Integer.toString(keylay[q][u]);
           if (user.equals(num) && positions[q][u] == 0) {
             positions[q][u] = 1;
-            computerMove();
+            userMoved = true;
+            break;
           }
         }
+        if (userMoved) break;
       }
+      if (userMoved) computerMove();
     }
   }
 
   void computerMove() {
-    ArrayList<int[]> openCells = new ArrayList<int[]>();
+    int[] move = findWinningMove(2); // Check if computer can win
+    if (move == null) {
+      move = findWinningMove(1); // Check if user can win and block it
+    }
+    if (move == null) {
+      ArrayList<int[]> openCells = new ArrayList<int[]>();
+      for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+          if (positions[i][j] == 0) {
+            openCells.add(new int[]{i, j});
+          }
+        }
+      }
+      if (openCells.size() > 0) {
+        move = openCells.get((int) random(openCells.size())); // Random move
+      }
+    }
+    if (move != null) {
+      positions[move[0]][move[1]] = 2;
+    }
+  }
+
+  int[] findWinningMove(int player) {
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < cols; j++) {
         if (positions[i][j] == 0) {
-          openCells.add(new int[]{i, j});
+          positions[i][j] = player;
+          if (checkWin(player)) {
+            positions[i][j] = 0;
+            return new int[]{i, j};
+          }
+          positions[i][j] = 0;
         }
       }
     }
-    if (openCells.size() > 0) {
-      int[] move = openCells.get((int) random(openCells.size()));
-      positions[move[0]][move[1]] = 2;
-    }
+    return null;
   }
 
   void drawGrid() {
@@ -108,6 +136,7 @@ class Tictactoe {
     } else if (isBoardFull()) {
       println("Draw!");
       noLoop();
+      new WinningScreen("Draw!");
     }
   }
 
