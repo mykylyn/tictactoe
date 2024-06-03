@@ -15,7 +15,7 @@ int cols = 3;
 int rounds = 2;
 int[][] positions;
 
-ArrayList<Boolean> win_record= new new ArrrayList<Boolean>();
+ArrayList<Boolean> win_record= new ArrayList<Boolean>();
 boolean finished = false;
 boolean won = false;
 
