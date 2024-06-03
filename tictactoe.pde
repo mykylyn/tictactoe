@@ -4,7 +4,6 @@ class Tictactoe {
     
     int dim = 3;
     
-    int[][] positions;
     int[][] keylay;
     ArrayList<Integer> keys = new ArrayList<Integer>();
     
@@ -14,211 +13,261 @@ class Tictactoe {
     
     int cellSize_cols;
     int cellSize_rows;
+    int times;
+    int turn_var;
     
     void layout() {
         positions = new int[rows][cols];
         keylay = new int[rows][cols];
         x = loadImage("x.png");
         o = loadImage("o.png");
-}
-    
-    void display() {
-        background(248, 248, 248);
-        
-        
-        /**
-        //the grid maker
-        line(0, height/dim, width, height/dim);
-        line(0, (height/dim)*2, width, (height/dim)*2);
-        
-        line(width/dim, 0, width/dim, height);
-        line((width/dim)*2, 0, (width/dim)*2, height);
-        
-        *
-        */
-        drawGrid();
-        
-        for (int i = 0; i < rows; i++) {
-            for (int x = 0; x < cols; x++) {
-                if (positions[i][x] == 0) {
-                } else if (positions[i][x] == 1) {
-                    image(o,(float)((width / rows) * x),(float)(height / cols) * i,
-                       (float) cellSize_rows,(float) cellSize_cols);
-                } else if (positions[i][x] == 2) {
-                }
-        }
-        }
-        win();
-        decide();
-        
-}
-    
-    void positioning() {
-        if (key >= '0' && key <= '9') {
-           // Thekey corresponding to the number 'i' is pressed
-            
-            input += key;
-           // println("User input: " + key);
-        }
-        if (keyCode == ENTER) {
-           // Do something with the user input (e.g., print it)
-            //println("User input: " + input);
-            user =input;
-           // Clear the string for new input
-            input = "";
-        }
-        
-        for (int w = 1; w <= (rows * cols); w++) {
-            keys.add(w);
-        }
-        
-        int r = 0;
-        
-        for (int t = 0; t < rows; t++) {
-            for (int e = 0; e < cols; e++) {
-                keylay[t][e] = keys.get(r);
-                r++;
-        }
-        }
-        
-        for (int q = 0; q < rows; q++) {
-            for (int u = 0; u < cols; u++) {
-                String num = Integer.toString(keylay[q][u]);
-                if (user.equals(num)) {
-                    fill(0);
-                    positions[q][u] = 1;
-                    //println(num + " pressed!");
-                   // image(o, 0, 0, 200, 200);
-                }
-        }
-        }
-        
-        /**
-        char num = (char) (i + '0'); // Convert integer to character
-       if (keyPressed && key == num) {
-        // The key corresponding to the number 'i' is pressed
-        fill(0);
-        positions[0][0] = 1;
-        println(key + " pressed!");
-        // image(o, 0, 0, 200, 200);
-}
-    }
-        *
-        */
-        
-        /**
-        for (int t = 0; t < rows; t++) {
-        
-        for (int e = 0; e < cols; e++) {
-        
-        System.out.print(keylay[t][e]);;
-        }
-        System.out.println();
-        
     }
         
-        *
-        */
-}
-    void drawGrid() {
-        background(248, 248, 248);
-        cellSize_cols = width / cols;
-        cellSize_rows = height / rows;
-        
-        stroke(0);
-        for (int i = 0; i <= rows; i++) {
-            line(0, i * cellSize_rows, cols * cellSize_cols, i * cellSize_rows);
-        }
-        for (int j = 0; j <= cols; j++) {
-            line(j* cellSize_cols, 0, j * cellSize_cols, rows * cellSize_cols);
-        }
-}
-    void win() {
-        boolean diagonalWin = false;
-        int winningSymbol = 1; // 1 integer
-        int hor = 0;
-        int ver = 0;
-        int dia = 0;
-        //when type 3*4 some error happened about out of bound
-        for (int q = 0; q < rows; q++) {
-            for (int u = 0; u < rows; u++) {
-                if (positions[q][u] ==  1) {
-                    hor++;
-            }
-                else if (positions[u][q] ==  1) {
-                    ver++;
-            }
-        }
+        void display() {
+            background(248, 248, 248);
             
-        }
-        
-        // Check the main diagonal
-        for (int i = 0; i < rows; i++) {
-            if (positions[i][i] != 0) { // Changed to check for non-zero value
-                //System.out.println("10   "+positions[i][i]);
-                if (i == 0) {
-                    //System.err.println(positions[i][i]);
-                    winningSymbol = positions[i][i];
-                } else if (positions[i][i] != winningSymbol) {
-                    //System.out.println("hi");
-                    break;
-                } else if (i == rows - 1) {
-                    //System.out.println("hi2");
-                    diagonalWin = true;
-                    
-                    
-                }
-            }
-        }
-        
-        if (!diagonalWin) {
-            // Check the secondary diagonal
+            
+            /**
+            //the grid maker
+            line(0, height/dim, width, height/dim);
+            line(0, (height/dim)*2, width, (height/dim)*2);
+            
+            line(width/dim, 0, width/dim, height);
+            line((width/dim)*2, 0, (width/dim)*2, height);
+            
+            *
+            */
+            drawGrid();
+            
             for (int i = 0; i < rows; i++) {
-                if (i == 0) {
-                    winningSymbol = positions[i][cols - 1 - i];
-                    if (winningSymbol == 0) { // Changed to check for non-zero value
-                        //System.out.println("No winning symbol found on the diagonal.");
-                        break;
+                for (int y = 0; y < cols; y++) {
+                    if (positions[i][y] == 0) {
+                    } else if (positions[i][y] == 1) {
+                        //System.out.println("was there "+positions[i][y]);
+                        image(o,(float)((width / rows) * y),(float)(height / cols) * i,
+                           (float) cellSize_rows,(float) cellSize_cols);
+                    } else if (positions[i][y] == 2) {
+                      image(x,(float)((width / rows) * y),(float)(height / cols) * i,
+                           (float) cellSize_rows,(float) cellSize_cols);
                     }
-                } else if (positions[i][cols - 1 - i] != winningSymbol) {
-                    //System.out.println("Winning symbol not found on the diagonal.");
-                    break;
-                } else if (i == rows - 1) {
-                    //System.out.println("Diagonal win detected!");
-                    diagonalWin = true;
                 }
             }
-        }
-        
-        
-        if (hor ==  rows || ver ==  cols) {
-            //System.out.println("You won");
-            won = true;
+            win();
+            decide();
             
         }
-        elseif (diagonalWin) {
-            won = true;
-        }
-        
-        
-        
-}
-    
-    void decide() {
-        int count = 0;
-        for (int q = 0; q < rows; q++) {
-            for (int u = 0; u < cols; u++) {
-                if (positions[q][u] ==  1 || positions[q][u] ==  2) {
-                    count++;
-                    //System.out.println("update made");
+            
+           void positioning() {
+                if (key >= '0' && key <= '9') {
+                    // Thekeycorresponding to the number 'i' is pressed
+                    
+                    input +=key;
+                    // println("User input: " + key);
                 }
-        }
-        }
-        
-        if (count ==  rows * cols) {
-            pg = 3;
-            
-        }
-        
-}
-}
+                if (keyCode == ENTER) {
+                   // Do something with the user input (e.g., print it)
+                    //println("User input: " + input);
+                   user = input;
+                    // Clear the string for new input
+                    input = "";
+                    turn();
+                }
+                
+                for (int w = 1; w <= (rows * cols); w++) {
+                    keys.add(w);
+                }
+                
+                int r = 0;
+                
+                for (int t = 0; t < rows; t++) {
+                    for (int e = 0; e < cols; e++) {
+                        keylay[t][e] = keys.get(r);
+                        r++;
+                    }
+                }
+                
+                for (int q = 0; q < rows; q++) {
+                    for (int u = 0; u < cols; u++) {
+                        String num = Integer.toString(keylay[q][u]);
+                        if (user.equals(num)) {
+                            //fill(0);
+                            positions[q][u] = turn_var;
+                            //println(num + " pressed!");
+                            // image(o, 0, 0, 200, 200);
+                        }
+                    }
+                }
+                
+                /**
+               char num= (char) (i + '0'); // Convert integer to character
+                if (keyPressed && key == num) {
+                // The key corresponding to the number 'i' is pressed
+                fill(0);
+                positions[0][0] = 1;
+                println(key + " pressed!");
+                // image(o, 0, 0, 200, 200);
+            }
+            }
+                *
+                */
+                
+                /**
+                for (intt = 0; t < rows; t++) {
+                
+                for (inte = 0; e < cols; e++) {
+                
+                System.out.print(keylay[t][e]);;
+            }
+                System.out.println();
+                
+            }
+                
+                *
+                */
+            }
+               void drawGrid() {
+                    background(248, 248, 248);
+                    cellSize_cols = width / cols;
+                    cellSize_rows = height / rows;
+                    
+                    stroke(0);
+                   for (int i =0; i <= rows; i++) {
+                        line(0, i * cellSize_rows, cols * cellSize_cols, i * cellSize_rows);
+                    }
+                   for (int j =0; j <= cols; j++) {
+                        line(j * cellSize_cols, 0, j * cellSize_cols, rows * cellSize_cols);
+                    }
+                }
+               void win() {
+                        boolean diagonalWin = false;
+                        int winningSymbol = turn_var; // 1 integer
+                        int hor_x = 0;
+                        int ver_x = 0;
+                        int dia_x = 0;
+
+                        int hor_o = 0;
+                        int ver_o = 0;
+                        int dia_o = 0;
+                        //when type 3*4 some error happened about out of bound
+                      for (int q = 0; q < rows; q++) {
+                          for (int u = 0; u < cols; u++) {
+                                if (positions[u][q] ==  2) {
+                                  hor_x ++;
+                                  //System.out.println("added 1 to hor_x");
+                                    if(winningSymbol==2){
+                                        
+                                    }
+                                    if(winningSymbol==1){
+                                        hor_o ++;
+                                    }
+                                }
+                               else if (positions[q][u] ==  2) {
+                                      ver_x ++;
+                                      //System.out.println("added 1 to ver_x");
+                                    if(winningSymbol==2){
+                                        
+                                    }
+                                    if(winningSymbol==1){
+                                        ver_o ++;
+                                    }
+                              }
+                              else if (positions[q][q] ==  2) {
+                                      dia_x ++;
+                                      //System.out.println("added 1 to dia_x");
+                                    if(winningSymbol==2){
+                                        
+                                    }
+                                    if(winningSymbol==1){
+                                        dia_o ++;
+                                    }
+                              }
+
+                                
+                            }
+                            
+                            
+                        }
+                        System.out.println(" hor_x "+hor_x);
+                        System.out.println(" ver_x "+ver_x);
+                        System.out.println(" dia_x "+dia_x);
+
+                        //
+                     
+                        
+                        
+                        if (hor_x ==  rows) {
+                            System.out.println("You won by rows");
+                            won = true;
+                            
+                        }
+                        if (ver_x ==  rows) {
+                            System.out.println("You won by cols");
+                            won = true;
+                            
+                        }
+                        if (dia_x ==  rows) {
+                            System.out.println("You won by dia");
+                            won = true;
+                            
+                        }
+                        
+                        
+                        
+                        else if (diagonalWin) {
+                            won = true;
+                        }
+                        
+                        
+                        
+                    }
+                        
+                   void decide() {
+                          int count = 0;
+                          for (int q = 0; q < rows; q++) {
+                              for (int u = 0; u < cols; u++) {
+                                    if (positions[q][u] ==  1 || positions[q][u] ==  2) {
+                                        count++;
+                                        //System.out.println("update made");
+                                    }
+                                }
+                            }
+                            
+                          if (count ==  rows *cols) {
+                                System.out.println("tie game");
+                                pg = 3;
+                                
+                            }
+                            
+                        }
+                        void reset(){
+                          for (int i = 0; i < rows; i++) {
+                                for (int x = 0; x < rows; x++) {
+
+                                    System.out.print(positions[i][x]);
+                                 }
+                                 System.out.println();
+                          }
+                          for (int i = 0; i < rows; i++) {
+                                for (int x = 0; x < rows; x++) {
+
+                                    positions[i][x]=0;
+                                 }
+                          }
+                          System.out.println(" ");
+                          System.out.println("After ");
+                          System.out.println(" ");
+                          for (int i = 0; i < rows; i++) {
+                                for (int x = 0; x < rows; x++) {
+
+                                    System.out.print(positions[i][x]);
+                                 }
+                                 System.out.println();
+                          }
+
+                        }
+                        void turn(){
+                          times++;
+                          turn_var=(times%2)+1;
+                        }
+                        }
+                            
