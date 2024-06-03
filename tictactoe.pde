@@ -15,6 +15,7 @@ class Tictactoe {
   int cellSize_rows;
   int times;
   int turn_var;
+  boolean win;
 
   void layout() {
     positions = new int[rows][cols];
