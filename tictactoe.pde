@@ -151,31 +151,31 @@ class Tictactoe {
                         //when type 3*4 some error happened about out of bound
                       for (int q = 0; q < rows; q++) {
                           for (int u = 0; u < cols; u++) {
-                                if (positions[u][q] ==  2) {
-                                  hor_x ++;
+                                if (positions[q][u] ==  winningSymbol) {
+                                  
                                   //System.out.println("added 1 to hor_x");
                                     if(winningSymbol==2){
-                                        
+                                        hor_x ++;
                                     }
                                     if(winningSymbol==1){
                                         hor_o ++;
                                     }
                                 }
-                               else if (positions[q][u] ==  2) {
-                                      ver_x ++;
+                               else if (positions[u][q] ==  winningSymbol) {
+                                      
                                       //System.out.println("added 1 to ver_x");
                                     if(winningSymbol==2){
-                                        
+                                        ver_x ++;
                                     }
                                     if(winningSymbol==1){
                                         ver_o ++;
                                     }
                               }
-                              else if (positions[q][q] ==  2) {
-                                      dia_x ++;
+                              else if (positions[q][q] ==  winningSymbol) {
+                                      
                                       //System.out.println("added 1 to dia_x");
                                     if(winningSymbol==2){
-                                        
+                                        dia_x ++;
                                     }
                                     if(winningSymbol==1){
                                         dia_o ++;
@@ -184,6 +184,35 @@ class Tictactoe {
 
                                 
                             }
+
+                            if (hor_x ==  rows || hor_o ==  rows) {
+                            System.out.println("You won by rows");
+                            won = true;
+                            break;
+                            
+                        }
+                        if (ver_x ==  cols || ver_o ==  cols) {
+                            System.out.println("You won by cols");
+                            won = true;
+                            break;
+                            
+                        }
+                        if (dia_x ==  rows  || dia_o ==  rows) {
+                            System.out.println("You won by dia");
+                            won = true;
+                            break;
+                            
+                        }
+
+
+
+                            hor_x=0;
+                            ver_x=0;
+                            dia_x=0;
+
+                            hor_o=0;
+                            ver_o=0;
+                            dia_o=0;
                             
                             
                         }
@@ -195,28 +224,11 @@ class Tictactoe {
                      
                         
                         
-                        if (hor_x ==  rows) {
-                            System.out.println("You won by rows");
-                            won = true;
-                            
-                        }
-                        if (ver_x ==  rows) {
-                            System.out.println("You won by cols");
-                            won = true;
-                            
-                        }
-                        if (dia_x ==  rows) {
-                            System.out.println("You won by dia");
-                            won = true;
-                            
-                        }
                         
                         
                         
-                        else if (diagonalWin) {
-                            won = true;
-                        }
                         
+                       
                         
                         
                     }
