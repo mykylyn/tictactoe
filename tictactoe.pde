@@ -72,6 +72,7 @@ class Tictactoe {
   }
 
   void computerMove() {
+    delay(1000); // 1-second delay before the computer makes its move
     int[] move = findWinningMove(2); // Check if computer can win
     if (move == null) {
       move = findWinningMove(1); // Check if user can win and block it
