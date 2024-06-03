@@ -14,6 +14,7 @@ int rows = 3;
 int cols = 3;
 int round = 1;
 boolean finished = false;
+boolean won=false;
 
 InfoPage infopg = new InfoPage();
 Tictactoe tttpg = new Tictactoe();
@@ -46,6 +47,9 @@ public void draw() {
   } else if (pg == 2) {
     for (int i = 0; i < round; i++) {
       tttpg.display();
+      if(won){
+        System.out.println("YOU WON!!");
+      }
       finished = true;
     }
 
