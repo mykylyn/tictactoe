@@ -1,6 +1,5 @@
 class Ending {
-
-  Confetti con = new Confetti();
+  //Confetti con = new Confetti();
   int buttonWidth = 200;
   int buttonHeight = 50;
   int buttonX;
@@ -46,7 +45,7 @@ class Ending {
     fill(255);
     textSize(24);
     text("Go back", buttonX + buttonWidth / 2, exitButtonY + buttonHeight / 2);
-    
+
     //Make the confetti work
 
     //con.drawConfetti(0);
@@ -69,11 +68,11 @@ class Ending {
   boolean overButton(int x, int y, int width, int height) {
     return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
   }
+
   void stop() {
-  if (keyCode == ENTER) {
-    pg = 0;
+    if (keyCode == ENTER) {
+      pg = 0;
 
+    }
   }
-  }
-
 }

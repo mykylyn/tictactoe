@@ -26,7 +26,7 @@ boolean won = false;
 InfoPage infopg = new InfoPage();
 Tictactoe tttpg = new Tictactoe();
 landingPage home = new landingPage();
-//Ending end= new Ending();
+BPage end= new BPage();
 
 // Organizer pgmg= new Organizer();
 
