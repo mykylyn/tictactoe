@@ -1,6 +1,6 @@
 /**int rows = 3;
 int cols = 3;
-int[][] board;
+int[][] positions;
 boolean playerTurn = true; // Variable to track whose turn it is
 boolean gameOver = false;
 boolean playerWins = false;
@@ -37,7 +37,7 @@ void mouseClicked() {
 }
 
 void initializeBoard() {
-  board = new int[rows][cols];
+  positions = new int[rows][cols];
 }
 
 // Base Page class
@@ -140,7 +140,7 @@ class GamePage extends Page {
     int col = mouseX / (width / cols);
 
     if (isValidMove(row, col)) {
-      board[row][col] = 1; // Player move
+      positions[row][col] = 1; // Player move
       playerTurn = false;
       checkGameOver();
 
@@ -198,9 +198,9 @@ void drawBoard() {
 
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
-      if (board[i][j] == 1) {
+      if (positions[i][j] == 1) {
         drawX(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
-      } else if (board[i][j] == 2) {
+      } else if (positions[i][j] == 2) {
         drawO(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
       }
     }
@@ -217,7 +217,7 @@ void drawO(float x, float y, float w, float h) {
 }
 
 boolean isValidMove(int row, int col) {
-  return row >= 0 && row < rows && col >= 0 && col < cols && board[row][col] == 0;
+  return row >= 0 && row < rows && col >= 0 && col < cols && positions[row][col] == 0;
 }
 
 void checkGameOver() {
@@ -242,13 +242,13 @@ void checkGameOver() {
 boolean checkWin(int player) {
   // Check rows and columns
   for (int i = 0; i < rows; i++) {
-    if (board[i][0] == player && board[i][1] == player && board[i][2] == player) return true; // Rows
-    if (board[0][i] == player && board[1][i] == player && board[2][i] == player) return true; // Columns
+    if (positions[i][0] == player && positions[i][1] == player && positions[i][2] == player) return true; // Rows
+    if (positions[0][i] == player && positions[1][i] == player && positions[2][i] == player) return true; // Columns
   }
 
   // Check diagonals
-  if (board[0][0] == player && board[1][1] == player && board[2][2] == player) return true; // Diagonal from top-left to bottom-right
-  if (board[0][2] == player && board[1][1] == player && board[2][0] == player) return true; // Diagonal from top-right to bottom-left
+  if (positions[0][0] == player && positions[1][1] == player && positions[2][2] == player) return true; // Diagonal from top-left to bottom-right
+  if (positions[0][2] == player && positions[1][1] == player && positions[2][0] == player) return true; // Diagonal from top-right to bottom-left
 
   return false;
 }
@@ -256,7 +256,7 @@ boolean checkWin(int player) {
 boolean isBoardFull() {
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
-      if (board[i][j] == 0) return false;
+      if (positions[i][j] == 0) return false;
     }
   }
   return true;
@@ -266,12 +266,12 @@ void computerMove() {
   // Check if the computer can win
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
-      if (board[i][j] == 0) {
-        board[i][j] = 2;
+      if (positions[i][j] == 0) {
+        positions[i][j] = 2;
         if (checkWin(2)) {
           return;
         } else {
-          board[i][j] = 0;
+          positions[i][j] = 0;
         }
       }
     }
@@ -280,13 +280,13 @@ void computerMove() {
   // Check if the player can win, block them
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
-      if (board[i][j] == 0) {
-        board[i][j] = 1;
+      if (positions[i][j] == 0) {
+        positions[i][j] = 1;
         if (checkWin(1)) {
-          board[i][j] = 2;
+          positions[i][j] = 2;
           return;
         } else {
-          board[i][j] = 0;
+          positions[i][j] = 0;
         }
       }
     }
@@ -297,7 +297,7 @@ void computerMove() {
     int row = int(random(rows));
     int col = int(random(cols));
     if (isValidMove(row, col)) {
-      board[row][col] = 2; // Computer move
+      positions[row][col] = 2; // Computer move
       return;
     }
   }

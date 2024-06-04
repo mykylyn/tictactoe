@@ -15,9 +15,18 @@ int rows = 3;
 int cols = 3;
 int rounds = 2;
 int[][] positions;
+boolean state;
 
 int cellSize_cols;
 int cellSize_rows;
+
+boolean playerTurn = true; // Variable to track whose turn it is
+boolean gameOver = false;
+boolean playerWins = false;
+boolean computerWins = false;
+
+boolean win;
+
 
 ArrayList<Boolean> win_record= new ArrayList<Boolean>();
 boolean finished = false;
@@ -27,6 +36,18 @@ InfoPage infopg = new InfoPage();
 Tictactoe tttpg = new Tictactoe();
 landingPage home = new landingPage();
 BPage end= new BPage();
+Computer_brain comp= new Computer_brain();
+
+//LandingPage landingPage = new LandingPage();
+//InfoPage infoPage = new InfoPage(); is not good enough
+//GamePage gamePage = new GamePage();
+
+//EndPage endPage = new EndPage();
+
+boolean overButton(int x, int y, int w, int h) {
+  return mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h;
+}
+// to make it universally accessible
 
 // Organizer pgmg= new Organizer();
 
@@ -73,33 +94,51 @@ public void draw() {
   //if (positions.length()>0) {
   }
 
-void keyPressed() {
-  if (pg == 0) {
-    // home.display();
+    
 
-  }
-  else if (pg == 1) {
-    infopg.decide();
-  }
-  else if (pg == 2) {
-    tttpg.positioning();
+  void drawConfetti(int depth) {
+    if (depth > 200) return;
 
-  }
-  else if (pg == 3) {
-    //end.stop();
+    float x = random(width);
+    float y = random(height);
+    float size = random(10, 20);
+    fill(random(255), random(255), random(255));
+    noStroke();
+    ellipse(x, y, size, size);
 
+    drawConfetti(depth + 1);
   }
-}
 
-void mousePressed() {
-  if (pg == 0) {
-    home.mouseEvents();
 
+
+  void keyPressed() {
+    if (pg == 0) {
+      // home.display();
+
+    }
+    else if (pg == 1) {
+      infopg.decide();
+    }
+    else if (pg == 2) {
+      tttpg.positioning();
+     
+    }
+    else if (pg == 3) {
+      //end.stop();
+
+    }
   }
-  else if (pg == 1) {
+
+  void mousePressed() {
+    if (pg == 0) {
+      home.mouseEvents();
+
+    }
+    else if (pg == 1) {
+
+    }
+    else if (pg == 2) {
+    }
+    else if (pg == 3) {
+    }
   }
-  else if (pg == 2) {
-  }
-  else if (pg == 3) {
-  }
-}

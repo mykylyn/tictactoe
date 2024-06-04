@@ -5,7 +5,6 @@ class Tictactoe {
 
   int dim = 3;
 
-  int[][] positions;
   int[][] keylay;
   ArrayList<Integer> keys = new ArrayList<Integer>();
 
@@ -16,7 +15,10 @@ class Tictactoe {
   int cellSize_rows;
   int times;
   int turn_var;
-  boolean win;
+
+
+Computer_brain comp= new Computer_brain();
+
 
   //TODO: Change background color according to the turn
 
@@ -98,11 +100,14 @@ class Tictactoe {
     for (int q=0; q<rows; q++) {
       for (int u=0; u<cols; u++) {
         String num = Integer.toString(keylay[q][u]);
-        if (user.equals(num)) {
+        if (user.equals(num) && turn_var==1 && playerTurn == true) {
           //fill(0);
           positions[q][u] = turn_var;
           //println(num + " pressed!");
           // image(o, 0, 0, 200, 200);
+        }
+        else if(turn_var==2 && playerTurn==false){
+          comp.computerMove();
         }
       }
     }
@@ -253,6 +258,7 @@ void win() {
   //System.out.println(" dia_x "+dia_x);
 
   //
+  comp.checkWin(turn_var);
 
 }
 
