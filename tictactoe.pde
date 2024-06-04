@@ -17,6 +17,7 @@ class Tictactoe {
   int times;
   int turn_var;
   boolean win;
+  boolean userMoved;
 
   //TODO: Change background color according to the turn
 
@@ -101,11 +102,17 @@ class Tictactoe {
         if (user.equals(num)) {
           //fill(0);
           positions[q][u] = turn_var;
+          userMoved = true;
+          break;
+
+
           //println(num + " pressed!");
           // image(o, 0, 0, 200, 200);
         }
       }
+      if (userMoved) break;
     }
+    if (userMoved) computerMove();
     /** char num=(char)(i + '0'); // Convert integer to character
     if (keyPressed && key == num) {
       // The key corresponding to the number 'i' is pressed
@@ -130,6 +137,61 @@ class Tictactoe {
   }
   * */
 }
+
+
+
+void computerMove() {
+  int[] move = findWinningMove(2); // Check if computer can win
+  if (move == null) {
+    move = findWinningMove(1); // Check if user can win and block it
+  }
+  if (move == null) {
+    ArrayList<int[]> openCells = new ArrayList<int[]>();
+    for (int i=0; i<rows; i++) {
+      for (int j=0; j<cols; j++) {
+        if (positions[i][j] == 0) {
+          openCells.add(new int[] {i, j}); // Added closing bracket here
+        }
+      }
+    }
+    if (openCells.size() > 0) {
+      move = openCells.get((int) random(openCells.size())); // Random move
+    }
+  }
+  if (move != null) {
+    positions[move[0]][move[1]] = 2;
+    //display(); // Redraw the board after updating positions
+
+    
+  }
+}
+
+
+
+
+
+int[] findWinningMove(int player) {
+  for (int i=0; i<rows; i++) {
+    for (int j=0; j<cols; j++) {
+      if (positions[i][j] == 0) {
+        positions[i][j] = player;
+        if (checkWin(player)) {
+          positions[i][j] = 0;
+          return new int[]{i, j};
+        }
+        positions[i][j] = 0;
+      }
+    }
+  }
+  return null;
+}
+
+
+
+
+
+
+
 
 void drawGrid() {
   background(248, 248, 248);
@@ -256,52 +318,7 @@ void win() {
 
 }
 
-/*
-Computer logic not working property has syntax error and bugs need fixing 
 
-  void decide() {
-    if (checkWin(1)) {
-      println("User wins!");
-      noLoop();
-      new WinningScreen("User wins!");
-      new Confetti();
-    } else if (checkWin(2)) {
-      println("Computer wins!");
-      noLoop();
-      new WinningScreen("Computer wins!");
-      new Confetti();
-    } else if (isBoardFull()) {
-      println("Draw!");
-      noLoop();
-      new WinningScreen("Draw!");
-    }
-  }
-
-  boolean checkWin(int player) {
-    for (int i = 0; i < rows; i++) {
-      if (positions[i][0] == player && positions[i][1] == player && positions[i][2] == player) return true;
-    }
-    for (int j = 0; j < cols; j++) {
-      if (positions[0][j] == player && positions[1][j] == player && positions[2][j] == player) return true;
-    }
-    if (positions[0][0] == player && positions[1][1] == player && positions[2][2] == player) return true;
-    if (positions[0][2] == player && positions[1][1] == player && positions[2][0] == player) return true;
-    return false;
-  }
-
-  boolean isBoardFull() {
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < cols; j++) {
-        if (positions[i][j] == 0) return false;
-      }
-    }
-    return true;
-  }
-}
-
-
-
- */
 
 
 
@@ -309,21 +326,50 @@ Computer logic not working property has syntax error and bugs need fixing
 
 
 void decide() {
-  int count = 0;
-  for (int q=0; q<rows; q++) {
-    for (int u=0; u<cols; u++) {
-      if (positions[q][u] == 1 || positions[q][u] == 2) {
-        count++;
-        //System.out.println("update made");
-      }
-    }
+  if (checkWin(1)) {
+    println("User wins!");
+    noLoop();
+    new WinningScreen("User wins!");
+    new Confetti();
   }
-  if (count == rows *cols) {
-    System.out.println("tie game");
-    pg = 3;
-
+  else if (checkWin(2)) {
+    println("Computer wins!");
+    noLoop();
+    new WinningScreen("Computer wins!");
+    new Confetti();
+  }
+  else if (isBoardFull()) {
+    println("Draw!");
+    noLoop();
+    new WinningScreen("Draw!");
   }
 }
+
+
+boolean checkWin(int player) {
+  for (int i=0; i<rows; i++) {
+    if (positions[i][0] == player && positions[i][1] == player && positions[i][2] == player) return true;
+  }
+  for (int j=0; j<cols; j++) {
+    if (positions[0][j] == player && positions[1][j] == player && positions[2][j] == player) return true;
+  }
+  if (positions[0][0] == player && positions[1][1] == player && positions[2][2] == player) return true;
+  if (positions[0][2] == player && positions[1][1] == player && positions[2][0] == player) return true;
+  return false;
+}
+
+
+boolean isBoardFull() {
+  for (int i=0; i<rows; i++) {
+    for (int j=0; j<cols; j++) {
+      if (positions[i][j] == 0) return false;
+    }
+  }
+  return true;
+}
+
+
+
 
 void reset() {
   for (int i=0; i<rows; i++) {
@@ -352,6 +398,45 @@ void turn() {
   times++;
   turn_var=(times%2)+1;
 }
+
+
+// Class for displaying the winning screen
+class WinningScreen {
+  String message;
+
+  WinningScreen(String message) {
+    this.message = message;
+    display();
+  }
+
+  void display() {
+    background(0, 200, 0);
+    fill(255);
+    textSize(32);
+    textAlign(CENTER, CENTER);
+    text(message, width / 2, height / 2);
+  }
+}
+// Class for displaying confetti using recursion
+class Confetti {
+
+  Confetti() {
+    drawConfetti(0);
+  }
+
+  void drawConfetti(int count) {
+    if (count < 50) {
+      fill(random(255), random(255), random(255));
+      ellipse(random(width), random(height), 10, 10);
+      delay(50);
+      drawConfetti(count + 1);
+    }
+  }
+}
+
+
+
+
 
 
 }
