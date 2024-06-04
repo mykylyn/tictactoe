@@ -20,6 +20,10 @@ int cellSize_rows;
 
 
 ArrayList<Boolean> win_record= new ArrayList<Boolean>();
+int rounds = 2;
+int[][] positions;
+
+ArrayList<Boolean> win_record= new ArrayList<Boolean>();
 boolean finished = false;
 boolean won = false;
 
