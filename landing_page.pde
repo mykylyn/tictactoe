@@ -57,7 +57,7 @@ class landingPage {
     if (overButton(buttonX, exitButtonY, buttonWidth, buttonHeight)) {
       exitGame = true;
       println("Exit button clicked");
-      exit();
+      //exit();
       pg = 1;
     }
   }

@@ -1,4 +1,3 @@
-// Class for the Tic Tac Toe game
 class Tictactoe {
   PImage x;
   PImage o;
@@ -9,6 +8,7 @@ class Tictactoe {
   ArrayList<Integer> keys = new ArrayList<Integer>();
 
   private String input = "";
+
   private String user = "";
 
   int cellSize_cols;
@@ -22,18 +22,6 @@ class Tictactoe {
     keylay = new int[rows][cols];
     x = loadImage("x.png");
     o = loadImage("o.png");
-    for(int w = 1;
-    w <=(rows * cols);
-    w++) {
-      keys.add(w);
-    }
-    int r = 0;
-    for (int t=0; t<rows; t++) {
-      for (int e=0; e<cols; e++) {
-        keylay[t][e] = keys.get(r);
-        r++;
-      }
-    }
   }
 
   void display() {
@@ -78,6 +66,7 @@ class Tictactoe {
       // Do something with the user input(e.g., print it)
       //println("User input: " + input);
       user = input;
+      // Clear the string for new input
       input = "";
       turn();
     }

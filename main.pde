@@ -8,6 +8,7 @@ import processing.dxf.*;
 // TODO: Make the point functionality work
 // TODO: The circle is not centered
 // TODO: Repeated modification to already filled boxes
+// TODO: Have to make sure the you are be to change fields already filled 
 
 int pg = 0;
 int rows = 3;
@@ -18,10 +19,6 @@ int[][] positions;
 int cellSize_cols;
 int cellSize_rows;
 
-
-ArrayList<Boolean> win_record= new ArrayList<Boolean>();
-int rounds = 2;
-int[][] positions;
 
 ArrayList<Boolean> win_record= new ArrayList<Boolean>();
 boolean finished = false;
