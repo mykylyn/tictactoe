@@ -15,4 +15,3 @@ class WinningScreen {
     text(message, width / 2, height / 2);
   }
 }
-

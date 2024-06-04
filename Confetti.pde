@@ -1,3 +1,6 @@
+
+/*
+
 // Class for displaying confetti using recursion
 class Confetti {
 

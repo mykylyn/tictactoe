@@ -26,7 +26,7 @@ boolean won = false;
 InfoPage infopg = new InfoPage();
 Tictactoe tttpg = new Tictactoe();
 landingPage home = new landingPage();
-Ending end= new Ending();
+//Ending end= new Ending();
 
 // Organizer pgmg= new Organizer();
 
@@ -38,7 +38,7 @@ public void setup() {
   //info screen
   infopg.layout();
 
-  end.layout();
+  //end.layout();
 }
 
 public void draw() {
@@ -68,7 +68,7 @@ public void draw() {
 
   }
   else if (pg == 3) {
-    end.display();
+    //end.display();
   }
   //if (positions.length()>0) {
   }
@@ -86,7 +86,7 @@ void keyPressed() {
 
   }
   else if (pg == 3) {
-    end.stop();
+    //end.stop();
 
   }
 }
