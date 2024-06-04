@@ -1,37 +1,49 @@
-/**import websockets.*;
+import java.net.*;
+import java.io.*;
+import java.util.Arrays;
 
-class Network{
-  
-  WebsocketServer ws;
-  int now;
-  float x,y;
+DatagramSocket socket;
+DatagramPacket packet;
 
-  void pre(){
-    //Initiates the websocket server, and listens for incoming connections on ws://localhost:8025/john
-    ws= new WebsocketServer(this,5204,"/john");
-    now=millis();
-    x=0;
-    y=0;
-  
-  }
-  
-  void send(){
-  
-    if(millis()>now+5000){
-      ws.sendMessage("Server message");
-      now=millis();
+Stirng messsage byte[] buf = new byte[256]; // Set your buffer size as desired
+
+class Network {
+
+  void network() {
+    try {
+      socket = new DatagramSocket(5005);
+      println("Server started on port 5005");
+
+      Thread receiveThread = new Thread(() -> {
+
+        while(true) {
+          try {
+            DatagramPacket packet = new DatagramPacket(buf, buf.length);
+            socket.receive(packet);
+            String received = new String(packet.getData(), 0, packet.getLength());
+
+            synchronized(messages) {
+              messages.add("Client: " + received);
+            }
+            println("Received message: " + received);
+
+            // Echo back the received message
+            DatagramPacket responsePacket = new DatagramPacket(buf, buf.length, packet.getAddress(), packet.getPort());
+            socket.send(responsePacket);
+          }
+
+          catch(IOException e) {
+            e.printStackTrace();
+            println(e.getMessage());
+          }
+        }
+      });
+      receiveThread.start();
     }
-  
+
+    catch(Exception e) {
+      e.printStackTrace();
+      println(e.getMessage());
+    }
   }
-  //If you chose to use it, it will be executed whenever a client sends a message
-  void webSocketServerEvent(String msg){
-     println(msg);
-     x=random(width);
-     y=random(height);
-  }
-
-
-
 }
-
-**/

@@ -18,7 +18,7 @@ boolean finished = false;
 InfoPage infopg = new InfoPage();
 Tictactoe tttpg = new Tictactoe();
 landingPage home = new landingPage();
-// Ending end= new Ending();
+Network net= new Network();
 
 // Organizer pgmg= new Organizer();
 
@@ -29,8 +29,8 @@ public void setup() {
   home.layout();
   // info screen
   infopg.layout();
-
-  // end.layout();
+  //where to start the server
+  //net.network();
 }
 
 public void draw() {
