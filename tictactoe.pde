@@ -18,6 +18,8 @@ class Tictactoe {
   int turn_var;
   boolean win;
 
+  //TODO: Change background color according to the turn
+
   void layout() {
     positions = new int[rows][cols];
     keylay = new int[rows][cols];
@@ -351,38 +353,5 @@ void turn() {
   turn_var=(times%2)+1;
 }
 
-
-
-class WinningScreen {
-  String message;
-
-  WinningScreen(String message) {
-    this.message = message;
-    display();
-  }
-
-  void display() {
-    background(0, 200, 0);
-    fill(255);
-    textSize(32);
-    textAlign(CENTER, CENTER);
-    text(message, width / 2, height / 2);
-  }
-}
-// Class for displaying confetti using recursion
-class Confetti {
-
-  Confetti() {
-    drawConfetti(0);
-  }
-
-  void drawConfetti(int count) {
-    if (count < 50) {
-      fill(random(255), random(255), random(255));
-      ellipse(random(width), random(height), 10, 10);
-      delay(50);
-      drawConfetti(count + 1);
-    }
-  }
 
 }

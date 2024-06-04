@@ -1,4 +1,4 @@
-int rows = 3;
+/**int rows = 3;
 int cols = 3;
 int[][] board;
 boolean playerTurn = true; // Variable to track whose turn it is
@@ -8,7 +8,7 @@ boolean computerWins = false;
 int pg = 0; // Page tracking variable
 
 void setup() {
-  size(800, 800);
+  //size(800, 800);
   initializeBoard();
 }
 
@@ -315,3 +315,5 @@ void drawConfetti(int depth) {
 
   drawConfetti(depth + 1);
 }
+
+**/
