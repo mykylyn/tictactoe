@@ -1,4 +1,4 @@
-class landingPage {
+class landingPage extends Page {
   int buttonWidth = 200;
   int buttonHeight = 50;
   int buttonX;
@@ -7,6 +7,12 @@ class landingPage {
   boolean startGame = false;
   boolean exitGame = false;
   // Organizer pgmg= new Organizer();
+
+  landingPage() {
+    //super(1);
+
+  }
+  
 
   void layout() {
     strokeWeight(4);
@@ -32,8 +38,7 @@ class landingPage {
     rect(buttonX, startButtonY, buttonWidth, buttonHeight);
     fill(255);
     textSize(24);
-    text("Single player", buttonX + buttonWidth / 2,
-        startButtonY + buttonHeight / 2);
+    text("Single player", buttonX + buttonWidth / 2, startButtonY + buttonHeight / 2);
 
     // exit button
     if (overButton(buttonX, exitButtonY, buttonWidth, buttonHeight)) {
@@ -41,11 +46,11 @@ class landingPage {
     } else {
       fill(200, 0, 0);
     }
-    rect(buttonX, exitButtonY, buttonWidth, buttonHeight);
+    /* rect(buttonX, exitButtonY, buttonWidth, buttonHeight);
     fill(255);
     textSize(24);
-    text("Multiplayer", buttonX + buttonWidth / 2,
-        exitButtonY + buttonHeight / 2);
+    text("Multiplayer", buttonX + buttonWidth / 2, exitButtonY + buttonHeight / 2);
+    */
   }
 
   void mouseEvents() {
@@ -54,16 +59,16 @@ class landingPage {
       println("Start Game button clicked");
       pg = 1;
     }
-    if (overButton(buttonX, exitButtonY, buttonWidth, buttonHeight)) {
+    /* if (overButton(buttonX, exitButtonY, buttonWidth, buttonHeight)) {
       exitGame = true;
       println("Exit button clicked");
       //exit();
       pg = 1;
     }
+    */
   }
 
   boolean overButton(int x, int y, int width, int height) {
-    return mouseX >= x && mouseX <= x + width && mouseY >= y
-        && mouseY <= y + height;
+    return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
   }
 }

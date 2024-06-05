@@ -1,8 +1,10 @@
 // EndPage class
-/*
+
 
 class BBEnd extends Page {
   //Confetti con=new Confetti();
+
+  
 
   void display() {
     //System.out.println("I am here");
@@ -11,17 +13,19 @@ class BBEnd extends Page {
     textSize(32);
     fill(0);
 
-    if (won=true) {
+    if (xWins) {
+      text("X Wins!", width / 2, height / 2 - 40);
       if (hor_x==rows||ver_x==rows||dia_x==rows|| dia_x2==rows) {
-        text("X Wins!", width / 2, height / 2 - 40);
+        
       }
     }
 
-    else if (o_won) {
+    else if (oWins) {
+      text("O Wins!", width / 2, height / 2 - 40);
       if (hor_o==rows||ver_o==rows||dia_o==rows || dia_o2==rows) {
-        text("O Wins!", width / 2, height / 2 - 40);
+        
       }
-    } else {
+    } else if(tie){
       text("It's a Draw!", width / 2, height / 2 - 40);
     }
     drawConfetti(0);

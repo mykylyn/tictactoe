@@ -26,6 +26,13 @@ int turn_var;
 
 boolean x_won;
 boolean o_won;
+
+boolean tie;
+boolean xWins = false;
+boolean oWins = false;
+
+
+
 boolean done_in=false;
 
 boolean make_sure=true;
@@ -51,7 +58,7 @@ int dia_o2 = 0;
 InfoPage infopg = new InfoPage();
 Tictactoe tttpg = new Tictactoe();
 landingPage home = new landingPage();
-BPage end= new BPage();
+//BPage end= new BPage();
 
 BBEnd go= new BBEnd();
 
@@ -90,7 +97,7 @@ public void draw() {
     
     tttpg.display();
 
-    if (won) {
+    if (xWins || oWins || tie) {
       System.out.println("YOU WON!!");
       //tttpg.reset();
       pg = 3;
