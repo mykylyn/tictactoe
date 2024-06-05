@@ -36,7 +36,7 @@ InfoPage infopg = new InfoPage();
 Tictactoe tttpg = new Tictactoe();
 landingPage home = new landingPage();
 BPage end= new BPage();
-Computer_brain comp= new Computer_brain();
+//Computer_brain comp= new Computer_brain();
 
 //LandingPage landingPage = new LandingPage();
 //InfoPage infoPage = new InfoPage(); is not good enough

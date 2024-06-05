@@ -17,7 +17,12 @@ class Tictactoe {
   int turn_var;
 
 
-Computer_brain comp= new Computer_brain();
+boolean playerTurn = true; // Variable to track whose turn it is
+boolean gameOver = false;
+boolean xWins = false;
+boolean oWins = false;
+boolean singlePlayerMode = true; // Flag to determine game mode
+
 
 
   //TODO: Change background color according to the turn
@@ -70,6 +75,144 @@ Computer_brain comp= new Computer_brain();
 
   }
 
+
+  void mouseClicked() {
+  int row = mouseY /(height / rows);
+  int col = mouseX /(width / cols);
+
+  if (isValidMove(row, col)) {
+    positions[row][col] = playerTurn ? 1 : 2; // X for player, O for opponent
+    positioning();
+    playerTurn = !playerTurn; // Switch turns
+    checkGameOver();
+
+    if (!singlePlayerMode && !gameOver) {
+      positioning();
+    }
+    if (singlePlayerMode && !playerTurn && !gameOver) {
+      computerMove();
+      positioning();
+      playerTurn = true;
+      checkGameOver();
+    }
+  }
+}
+
+void checkGameOver() {
+  if (checkWin(1)) {
+    gameOver = true;
+    xWins = true;
+    oWins = false;
+    println("X wins!");
+  }
+  else if (checkWin(2)) {
+    gameOver = true;
+    xWins = false;
+    oWins = true;
+    println("O wins!");
+  }
+  else if (ispositionsFull()) {
+    gameOver = true;
+    xWins = false;
+    oWins = false;
+    println("It's a draw!");
+  }
+}
+
+boolean checkWin(int player) {
+  for (int i=0; i<rows; i++) {
+    if (allEqual(player, positions[i])) return true; // Rows
+    if (allEqual(player, column(i))) return true; // Columns
+  }
+  if (allEqual(player, diagonal1())) return true; // Diagonal from top-left to bottom-right
+  if (allEqual(player, diagonal2())) return true; // Diagonal from top-right to bottom-left
+
+  return false;
+}
+
+boolean allEqual(int player, int[] line) {
+  for(int value : line) {
+    if (value != player) return false;
+  }
+  return true;
+}
+
+int[] column(int colIndex) {
+  int[] col = new int[rows];
+  for (int i=0; i<rows; i++) {
+    col[i] = positions[i][colIndex];
+  }
+  return col;
+}
+
+int[] diagonal1() {
+  int[] diag = new int[rows];
+  for (int i=0; i<rows; i++) {
+    diag[i] = positions[i][i];
+  }
+  return diag;
+}
+
+int[] diagonal2() {
+  int[] diag = new int[rows];
+  for (int i=0; i<rows; i++) {
+    diag[i] = positions[i][rows - 1 - i];
+  }
+  return diag;
+}
+
+boolean ispositionsFull() {
+  for (int i=0; i<rows; i++) {
+    for (int j=0; j<cols; j++) {
+      if (positions[i][j] == 0) return false;
+    }
+  }
+  return true;
+}
+
+void computerMove() {
+  for (int i=0; i<rows; i++) {
+    for (int j=0; j<cols; j++) {
+      if (positions[i][j] == 0) {
+        positions[i][j] = 2;
+        if (checkWin(2)) {
+          return;
+        } else {
+          positions[i][j] = 0;
+        }
+      }
+    }
+  }
+  for (int i=0; i<rows; i++) {
+    for (int j=0; j<cols; j++) {
+      if (positions[i][j] == 0) {
+        positions[i][j] = 1;
+        if (checkWin(1)) {
+          positions[i][j] = 2;
+          return;
+        } else {
+          positions[i][j] = 0;
+        }
+      }
+    }
+  }
+
+  while(true) {
+    int row = int(random(rows));
+    int col = int(random(cols));
+    if (isValidMove(row, col)) {
+      positions[row][col] = 2;
+      return;
+    }
+  }
+}
+
+boolean isValidMove(int row, int col) {
+  return row >= 0 && row < rows && col >= 0 && col < cols && positions[row][col] == 0;
+}
+
+
+
   void positioning() {
     if (key >= '0' && key <= '9') {
       // Thekeycorresponding to the number 'i' is pressed
@@ -107,7 +250,7 @@ Computer_brain comp= new Computer_brain();
           // image(o, 0, 0, 200, 200);
         }
         else if(turn_var==2 && playerTurn==false){
-          comp.computerMove();
+          //comp.computerMove();
         }
       }
     }
@@ -258,7 +401,7 @@ void win() {
   //System.out.println(" dia_x "+dia_x);
 
   //
-  comp.checkWin(turn_var);
+  //comp.checkWin(turn_var);
 
 }
 

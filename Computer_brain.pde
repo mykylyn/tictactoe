@@ -1,3 +1,4 @@
+/* *
 class Computer_brain {
 
   boolean isValidMove(int row, int col) {
