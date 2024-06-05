@@ -26,6 +26,12 @@ int turn_var;
 
 boolean x_won;
 boolean o_won;
+boolean done_in=false;
+
+boolean make_sure=true;
+
+int nim;
+
 
 
 int hor_x = 0;
@@ -57,9 +63,13 @@ public void setup() {
   //landing screen
   home.layout();
   //info screen
-  infopg.layout();
+  //infopg.layout();
 
   //end.layout();
+}
+
+boolean overButton(int x, int y, int w, int h) {
+  return mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h;
 }
 
 public void draw() {
@@ -71,7 +81,7 @@ public void draw() {
   else if (pg == 1) {
     infopg.display();
     // infopg.decide();
-    infopg.starter();
+    //infopg.starter();
     tttpg.layout();
 
     //tttpg.decide();
@@ -104,7 +114,7 @@ void keyPressed() {
 
   }
   else if (pg == 1) {
-    infopg.decide();
+    //infopg.decide();
   }
   else if (pg == 2) {
     tttpg.positioning();
@@ -122,8 +132,10 @@ void mousePressed() {
 
   }
   else if (pg == 1) {
+    infopg.mouseClicked();
   }
   else if (pg == 2) {
+    tttpg.mouseClicked();
   }
   else if (pg == 3) {
     go.mouseClicked();

@@ -1,45 +1,49 @@
-class InfoPage {
-    String thestate = "rows";
-    
-    boolean gameStarted = false;
-    
-    String input = "";
-    
-    void starter() {
-        if (!gameStarted) {
-            display();
-        } else {
-           pg = 2;
-        }
-}
-    
-    void layout() {
-        textAlign(CENTER);
-        textSize(30);
-}
-    
-    void display() {
-        background(255);
-        fill(0);
-        text("Enter the dimension you want ", width / 2, height / 2 - 100);
-        text(input, width / 2, height / 2);
-        text("Press Enter to confirm", width / 2, height / 2 + 100);
-}
-    
-    void decide() {
-        if (!gameStarted) {
-           if (key >= '3' && key <= '6') {
-                input +=key;
-        } else if (key == BACKSPACE && input.length() > 0) {
-                input = input.substring(0, input.length() - 1);
-        } else if (key == ENTER) {
-                if (thestate.equals("rows")) {
-                   rows = constrain(int(input), 3, 6);
-                    cols = constrain(int(input), 3, 6);
-                    gameStarted = true;
-                }
-                input = "";
-        }
-        }
-}
+
+
+// InfoPage class
+class InfoPage extends Page {
+
+  void display() {
+    background(255);
+    textAlign(CENTER, CENTER);
+    textSize(24);
+    fill(0);
+    text("Enter the number of rows and columns(3-5)", width / 2, height / 2 - 50);
+    text(rows + " x " + cols, width / 2, height / 2);
+
+    // Increase rows and columns
+    if (overButton(width / 2 - 100, height / 2 + 40, 50, 50)) {
+      fill(200, 0, 0); // Darker Red
+    } else {
+      fill(255, 0, 0); // Red
+    }
+    rect(width / 2 - 100, height / 2 + 40, 50, 50);
+    fill(255);
+    text("+", width / 2 - 75, height / 2 + 65);
+
+    // Decrease rows and columns
+    if (overButton(width / 2 + 50, height / 2 + 40, 50, 50)) {
+      fill(0, 0, 200); // Darker Blue
+    } else {
+      fill(0, 0, 255); // Blue
+    }
+    rect(width / 2 + 50, height / 2 + 40, 50, 50);
+    fill(255);
+    text("-", width / 2 + 75, height / 2 + 65);
+  }
+
+  void mouseClicked() {
+    if (overButton(width / 2 - 100, height / 2 + 40, 50, 50)) {
+      rows = constrain(rows + 1, 3, 5);
+      cols = constrain(cols + 1, 3, 5);
+    }
+    else if (overButton(width / 2 + 50, height / 2 + 40, 50, 50)) {
+      rows = constrain(rows - 1, 3, 5);
+      cols = constrain(cols - 1, 3, 5);
+    } else {
+      pg = 2; // Start multiplayer game
+      //initializeBoard();
+      
+    }
+  }
 }
