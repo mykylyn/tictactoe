@@ -15,12 +15,12 @@ class Tictactoe {
   int cellSize_cols;
   int cellSize_rows;
   int times;
-  int turn_var;
   boolean win;
 
   //TODO: Change background color according to the turn
 
   void layout() {
+    
     positions = new int[rows][cols];
     keylay = new int[rows][cols];
     x = loadImage("x.png");
@@ -39,6 +39,16 @@ class Tictactoe {
 
   void display() {
     background(248, 248, 248);
+    
+    
+
+    if(turn_var==1){
+      background(245, 162, 163);
+    }
+    else if(turn_var==2){
+      background(162, 180, 245);
+    }
+    
 
     /** //the grid maker
     line(0, height/dim, width, height/dim);
@@ -49,6 +59,9 @@ class Tictactoe {
 
     * */
     drawGrid();
+
+    
+
 
     for (int i=0; i<rows; i++) {
       for (int y=0; y<cols; y++) {
@@ -132,7 +145,7 @@ class Tictactoe {
 }
 
 void drawGrid() {
-  background(248, 248, 248);
+  //background(248, 248, 248);
   cellSize_cols = width / cols;
   cellSize_rows = height / rows;
 
@@ -148,16 +161,7 @@ void drawGrid() {
 void win() {
   boolean diagonalWin = false;
   int winningSymbol = turn_var; // 1 integer
-  int hor_x = 0;
-  int ver_x = 0;
-  int dia_x = 0;
 
-  int hor_o = 0;
-  int ver_o = 0;
-  int dia_o = 0;
-
-  int dia_x2 = 0;
-  int dia_o2 = 0;
 
   //when type 3*4 some error happened about out of bound
   for (int q=0; q<rows; q++) {
@@ -197,6 +201,7 @@ void win() {
     if (ver_x == rows || ver_o == rows) {
       System.out.println("You won by cols");
       won = true;
+      pg=3;
       break;
 
     }
@@ -219,6 +224,7 @@ void win() {
     if (dia_x == rows || dia_o == rows) {
       System.out.println("You won by dia");
       won = true;
+      pg=3;
       break;
 
     }
@@ -245,6 +251,7 @@ void win() {
         System.out.println("Diagonal win detected!");
         //diagonalWin = true;
         win=true;
+        pg=3;
       }
     }
   }

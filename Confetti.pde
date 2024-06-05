@@ -1,19 +1,19 @@
-
-/*
-
-// Class for displaying confetti using recursion
 class Confetti {
 
   Confetti() {
     drawConfetti(0);
   }
 
-  void drawConfetti(int count) {
-    if (count < 50) {
-      fill(random(255), random(255), random(255));
-      ellipse(random(width), random(height), 10, 10);
-      delay(50);
-      drawConfetti(count + 1);
-    }
+  void drawConfetti(int depth) {
+    if (depth > 200) return;
+
+    float x = random(width);
+    float y = random(height);
+    float size = random(10, 20);
+    fill(random(255), random(255), random(255));
+    noStroke();
+    ellipse(x, y, size, size);
+
+    drawConfetti(depth + 1);
   }
 }

@@ -22,11 +22,32 @@ int cellSize_rows;
 ArrayList<Boolean> win_record= new ArrayList<Boolean>();
 boolean finished = false;
 boolean won = false;
+int turn_var;
+
+boolean x_won;
+boolean o_won;
+
+
+int hor_x = 0;
+int ver_x = 0;
+int dia_x = 0;
+
+int hor_o = 0;
+int ver_o = 0;
+int dia_o = 0;
+
+int dia_x2 = 0;
+int dia_o2 = 0;
+
+
+
 
 InfoPage infopg = new InfoPage();
 Tictactoe tttpg = new Tictactoe();
 landingPage home = new landingPage();
 BPage end= new BPage();
+
+BBEnd go= new BBEnd();
 
 // Organizer pgmg= new Organizer();
 
@@ -42,6 +63,7 @@ public void setup() {
 }
 
 public void draw() {
+  background(0, 0, 255);
   if (pg == 0) {
     home.display();
 
@@ -55,6 +77,7 @@ public void draw() {
     //tttpg.decide();
   }
   else if (pg == 2) {
+    
     tttpg.display();
 
     if (won) {
@@ -65,10 +88,12 @@ public void draw() {
       won=false;
     }
     finished = true;
+    
 
   }
   else if (pg == 3) {
-    //end.display();
+    go.display();
+    
   }
   //if (positions.length()>0) {
   }
@@ -101,5 +126,6 @@ void mousePressed() {
   else if (pg == 2) {
   }
   else if (pg == 3) {
+    go.mouseClicked();
   }
 }
