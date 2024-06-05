@@ -82,29 +82,37 @@ class Tictactoe {
       input = "";
       turn();
     }
-    for(int w = 1;
-    w <=(rows * cols);
-    w++) {
-      keys.add(w);
+    //System.out.println(rows * rows);
+    //System.out.println();
+    for(int w = 1;w <=(rows * rows);w++) {
+      System.out.println(w);
+      int i=w;
+      keys.add(w-1,i);
+      //System.out.print(keys.get(i-1)+ " ");
+
     }
+    //System.out.println();
     int r = 0;
 
     for (int t=0; t<rows; t++) {
-      for (int e=0; e<cols; e++) {
+      for (int e=0; e<rows; e++) {
         keylay[t][e] = keys.get(r);
         r++;
       }
     }
     for (int q=0; q<rows; q++) {
-      for (int u=0; u<cols; u++) {
+      for (int u=0; u<rows; u++) {
         String num = Integer.toString(keylay[q][u]);
+        
         if (user.equals(num)) {
           //fill(0);
           positions[q][u] = turn_var;
           //println(num + " pressed!");
           // image(o, 0, 0, 200, 200);
         }
+        //System.out.print(positions[q][u]);
       }
+      System.out.println();
     }
     /** char num=(char)(i + '0'); // Convert integer to character
     if (keyPressed && key == num) {
@@ -233,16 +241,16 @@ void win() {
         winningSymbol = positions[i][cols - 1 - i];
         if (winningSymbol == 0) {
           // Changed to check for non-zero value
-          System.out.println("No winning symbol found on the diagonal.");
+          //System.out.println("No winning symbol found on the diagonal.");
           break;
         }
       }
       else if (positions[i][cols - 1 - i] != winningSymbol) {
-        System.out.println("Winning symbol not found on the diagonal.");
+        //System.out.println("Winning symbol not found on the diagonal.");
         break;
       }
       else if (i == rows - 1) {
-        System.out.println("Diagonal win detected!");
+        //System.out.println("Diagonal win detected!");
         //diagonalWin = true;
         win=true;
       }
