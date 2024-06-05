@@ -16,6 +16,9 @@ int cols = 3;
 int rounds = 2;
 int[][] positions;
 
+
+
+
 int cellSize_cols;
 int cellSize_rows;
 
@@ -51,7 +54,7 @@ int dia_o2 = 0;
 InfoPage infopg = new InfoPage();
 Tictactoe tttpg = new Tictactoe();
 landingPage home = new landingPage();
-BPage end= new BPage();
+//BPage end= new BPage();
 
 BBEnd go= new BBEnd();
 
@@ -93,10 +96,12 @@ public void draw() {
     if (won) {
       System.out.println("YOU WON!!");
       //tttpg.reset();
+      delay(3000);
       pg = 3;
       win_record.add(won);
       won=false;
     }
+
     finished = true;
     
 
