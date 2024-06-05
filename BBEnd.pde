@@ -1,5 +1,5 @@
 // EndPage class
-
+/*
 
 class BBEnd extends Page {
   //Confetti con=new Confetti();
@@ -11,16 +11,19 @@ class BBEnd extends Page {
     textSize(32);
     fill(0);
 
-    if (xWins) {
-  text("Player Wins!", width / 2, height / 2 - 40);
-}
+    if (won=true) {
+      if (hor_x==rows||ver_x==rows||dia_x==rows|| dia_x2==rows) {
+        text("X Wins!", width / 2, height / 2 - 40);
+      }
+    }
 
-else if (oWins) {
-  text("Computer Wins!", width / 2, height / 2 - 40);
-} else {
-  text("It's a Draw!", width / 2, height / 2 - 40);
-}
-
+    else if (o_won) {
+      if (hor_o==rows||ver_o==rows||dia_o==rows || dia_o2==rows) {
+        text("O Wins!", width / 2, height / 2 - 40);
+      }
+    } else {
+      text("It's a Draw!", width / 2, height / 2 - 40);
+    }
     drawConfetti(0);
   }
 
