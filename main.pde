@@ -97,8 +97,10 @@ void mousePressed() {
 
   }
   else if (pg == 1) {
+    
   }
   else if (pg == 2) {
+    tttpg.mouseClicked();
   }
   else if (pg == 3) {
   }

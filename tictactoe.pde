@@ -3,7 +3,7 @@ class Tictactoe {
   PImage x;
   PImage o;
 
-  int dim = 3;
+  //int dim = 3;
 
   int[][] positions;
   int[][] keylay;
@@ -25,12 +25,14 @@ class Tictactoe {
     keylay = new int[rows][cols];
     x = loadImage("x.png");
     o = loadImage("o.png");
-    for (int w = 1; w <= (rows * cols); w++) {
+    for(int w = 1;
+    w <=(rows * cols);
+    w++) {
       keys.add(w);
     }
     int r = 0;
-    for (int t = 0; t < rows; t++) {
-      for (int e = 0; e < cols; e++) {
+    for (int t=0; t<rows; t++) {
+      for (int e=0; e<cols; e++) {
         keylay[t][e] = keys.get(r);
         r++;
       }
@@ -68,6 +70,8 @@ class Tictactoe {
 
   }
 
+
+
   void positioning() {
     if (key >= '0' && key <= '9') {
       // Thekeycorresponding to the number 'i' is pressed
@@ -84,7 +88,9 @@ class Tictactoe {
     }
     //System.out.println(rows * rows);
     //System.out.println();
-    for(int w = 1;w <=(rows * rows);w++) {
+    for(int w = 1;
+    w <=(rows * rows);
+    w++) {
       System.out.println(w);
       int i=w;
       keys.add(w-1,i);
@@ -103,7 +109,7 @@ class Tictactoe {
     for (int q=0; q<rows; q++) {
       for (int u=0; u<rows; u++) {
         String num = Integer.toString(keylay[q][u]);
-        
+
         if (user.equals(num)) {
           //fill(0);
           positions[q][u] = turn_var;
@@ -138,6 +144,18 @@ class Tictactoe {
   }
   * */
 }
+
+
+void mouseClicked() {
+  //println("ran");
+  turn();
+  int row = mouseY /(height / rows);
+  int col = mouseX /(width / cols);
+  //println(row+","+col+"="+turn_var);
+  positions[row][col] = turn_var;
+
+}
+
 
 void drawGrid() {
   background(248, 248, 248);
@@ -181,7 +199,10 @@ void win() {
       }
     }
     if (hor_x == rows || hor_o == rows) {
-      System.out.println("You won by rows");
+      //System.out.println("You won by rows");
+      textSize(40);
+      text("WON!!", width/2, height/2);
+      drawConfetti(0);
       won = true;
       break;
 
@@ -203,7 +224,10 @@ void win() {
       }
     }
     if (ver_x == rows || ver_o == rows) {
-      System.out.println("You won by cols");
+      //System.out.println("You won by cols");
+      textSize(40);
+      text("WON!!", width/2, height/2);
+      drawConfetti(0);
       won = true;
       break;
 
@@ -225,7 +249,10 @@ void win() {
       }
     }
     if (dia_x == rows || dia_o == rows) {
-      System.out.println("You won by dia");
+      //System.out.println("You won by dia");
+      textSize(40);
+      text("WON!!", width/2, height/2);
+      drawConfetti(0);
       won = true;
       break;
 
@@ -264,58 +291,6 @@ void win() {
 
 }
 
-/*
-Computer logic not working property has syntax error and bugs need fixing 
-
-  void decide() {
-    if (checkWin(1)) {
-      println("User wins!");
-      noLoop();
-      new WinningScreen("User wins!");
-      new Confetti();
-    } else if (checkWin(2)) {
-      println("Computer wins!");
-      noLoop();
-      new WinningScreen("Computer wins!");
-      new Confetti();
-    } else if (isBoardFull()) {
-      println("Draw!");
-      noLoop();
-      new WinningScreen("Draw!");
-    }
-  }
-
-  boolean checkWin(int player) {
-    for (int i = 0; i < rows; i++) {
-      if (positions[i][0] == player && positions[i][1] == player && positions[i][2] == player) return true;
-    }
-    for (int j = 0; j < cols; j++) {
-      if (positions[0][j] == player && positions[1][j] == player && positions[2][j] == player) return true;
-    }
-    if (positions[0][0] == player && positions[1][1] == player && positions[2][2] == player) return true;
-    if (positions[0][2] == player && positions[1][1] == player && positions[2][0] == player) return true;
-    return false;
-  }
-
-  boolean isBoardFull() {
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < cols; j++) {
-        if (positions[i][j] == 0) return false;
-      }
-    }
-    return true;
-  }
-}
-
-
-
- */
-
-
-
-
-
-
 void decide() {
   int count = 0;
   for (int q=0; q<rows; q++) {
@@ -328,7 +303,10 @@ void decide() {
   }
   if (count == rows *cols) {
     System.out.println("tie game");
-    pg = 3;
+    textSize(40);
+    text("Tie game", width/2, height/2);
+
+    //pg = 3;
 
   }
 }
@@ -356,10 +334,21 @@ void reset() {
   }
 }
 
+void drawConfetti(int depth) {
+  if (depth > 200) return;
+
+  float x = random(width);
+  float y = random(height);
+  float size = random(10, 20);
+  fill(random(255), random(255), random(255));
+  noStroke();
+  ellipse(x, y, size, size);
+
+  drawConfetti(depth + 1);
+}
+
 void turn() {
   times++;
   turn_var=(times%2)+1;
 }
-
-
 }
